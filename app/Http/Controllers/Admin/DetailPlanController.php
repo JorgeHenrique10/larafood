@@ -46,6 +46,19 @@ class DetailPlanController extends Controller
         return view('admin.pages.plans.details.create', ['plan' => $plan]);
     }
 
+    public function edit($idPlan, $idDetail)
+    {
+        $plan = $this->repositoryPlan->query()->findOrFail($idPlan);
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        $detail = $plan->details()->find($idDetail);
+
+        return view('admin.pages.plans.details.edit', ['plan' => $plan, 'detail' => $detail]);
+    }
+
     public function store(DetailPlanRequest $request, $planId)
     {
         $plan = $this->repositoryPlan->query()->findOrFail($planId);
@@ -57,5 +70,45 @@ class DetailPlanController extends Controller
         $plan->details()->create($request->all());
 
         return redirect()->route('detail.plans.index', $planId);
+    }
+
+    public function update(DetailPlanRequest $request, $idPlan, $idDetail)
+    {
+        $plan = $this->repositoryPlan->query()->findOrFail($idPlan);
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        $plan->details()->where('id', $idDetail)->update($request->except(['_token', '_method']));
+
+        return redirect()->route('detail.plans.index', $idPlan);
+    }
+
+    public function show($idPlan, $idDetail)
+    {
+        $plan = $this->repositoryPlan->query()->findOrFail($idPlan);
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        $detail = $plan->details()->find($idDetail);
+
+        return view('admin.pages.plans.details.show', ['plan' => $plan, 'detail' => $detail]);
+    }
+
+    public function destroy($idPlan, $idDetail)
+    {
+        $plan = $this->repositoryPlan->query()->findOrFail($idPlan);
+
+        if (!$plan) {
+            return redirect()->back();
+        }
+
+        $plan->details()->where('id', $idDetail)->delete();
+
+        return redirect()->route('detail.plans.index', $idPlan)
+            ->with('message', 'Detalhe removido com sucesso!');
     }
 }

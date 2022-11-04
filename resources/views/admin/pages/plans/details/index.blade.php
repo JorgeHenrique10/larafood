@@ -20,6 +20,7 @@
             #
         </div>
         <div class=" card-body">
+            @include('admin.includes.alerts')
             <table class="table table-condensed">
                 <thead>
                     <tr>
@@ -32,8 +33,8 @@
                         <tr>
                             <td>{{$detail->name}}</td>
                             <td style="width: 220px;">
-                                <a class="btn btn-lg btn-warning" href="{{route('plans.show', $plan->id)}}"><i class="far fa-eye"></i> Ver</a>
-                                <a class="btn btn-lg btn-info" href="{{route('plans.edit', $plan->id)}}"><i class="far fa-eye"></i> Edit</a>
+                                <a class="btn btn-lg btn-warning" href="{{route('detail.plans.show', [$plan->id, $detail->id])}}"><i class="far fa-eye"></i> Ver</a>
+                                <a class="btn btn-lg btn-info" href="{{route('detail.plans.edit', [$plan->id, $detail->id])}}"><i class="far fa-eye"></i> Edit</a>
                             </td>
                         </tr>
                     @endforeach

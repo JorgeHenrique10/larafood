@@ -28,6 +28,10 @@ Route::prefix('admin')->group(function () {
     Route::get('plans/{id}/detail', [DetailPlanController::class, 'index'])->name('detail.plans.index');
     Route::get('plans/{id}/detail/create', [DetailPlanController::class, 'create'])->name('detail.plans.create');
     Route::post('plans/{id}/detail', [DetailPlanController::class, 'store'])->name('detail.plans.store');
+    Route::get('plans/{idPlan}/detail/{idDetail}/edit', [DetailPlanController::class, 'edit'])->name('detail.plans.edit');
+    Route::put('plans/{idPlan}/detail/{idDetail}', [DetailPlanController::class, 'update'])->name('detail.plans.update');
+    Route::get('plans/{idPlan}/detail/{idDetail}', [DetailPlanController::class, 'show'])->name('detail.plans.show');
+    Route::delete('plans/{idPlan}/detail/{idDetail}', [DetailPlanController::class, 'destroy'])->name('detail.plans.destroy');
 
 
     /**
