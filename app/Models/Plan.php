@@ -16,6 +16,12 @@ class Plan extends Model
     protected $table = 'plans';
     protected $fillable = ['name', 'description', 'url', 'price'];
 
+
+    public function details()
+    {
+        return $this->hasMany(DetailPlan::class, 'plan_id');
+    }
+
     public function search($filter = null)
     {
         $plans = $this
