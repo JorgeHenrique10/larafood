@@ -100,7 +100,7 @@ class ProfileController extends Controller
         if (!$profile)
             return redirect()->back();
 
-        $this->repository->update($request->all());
+        $profile->update($request->all());
 
         return redirect()
             ->route('profiles.index')
