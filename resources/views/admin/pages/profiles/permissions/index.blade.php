@@ -1,22 +1,23 @@
 @extends('adminlte::page')
 
-@section('title', 'Permissão')
+@section('title', 'Permissões do Perfil')
 
 @section('content_header')
     <div class="breadcrumb mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"> <a href="{{route('admin.index')}}">Dasboard</a></li>
-            <li class="breadcrumb-item"> <a href="{{route('permissions.index')}}">Permissão</a></li>
+            <li class="breadcrumb-item"> <a href="{{route('profiles.index')}}">Perfil</a></li>
+            <li class="breadcrumb-item active"> <a href="{{route('profiles.permissions.index', $profile->id)}}">Perfil {{$profile->name}}</a></li>
         </ol>
     </div>
-    <h1>Permissão <a href="{{route('permissions.create')}}" class="btn btn-dark"><i class="fas fa-plus"></i>  Add </a></h1>
+    <h1>Permissões do Perfil <strong>{{$profile->name}}</strong> <a href="{{route('profiles.permissions.available', $profile->id)}}" class="btn btn-dark"><i class="fas fa-plus"></i>  Add Permissão</a></h1>
 @stop
 
 @section('content')
     <div class="card">
         @include('admin.includes.alerts')
         <div class="card-header">
-            <form class="form form-inline" action="{{route('permissions.search')}}" method="POST">
+            <form class="form form-inline" action="{{route('profiles.search')}}" method="POST">
                 @csrf
                 <div class="flex form-group">
                     <input class="form-control" type="text" name="filter" value="{{ isset($filters) ? $filters['filter'] : '' }}">
@@ -29,7 +30,6 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Descrição</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -37,11 +37,11 @@
                     @foreach ($permissions as $permission)
                         <tr>
                             <td>{{$permission->name}}</td>
-                            <td>{{$permission->description}}</td>
                             <td style="width: 350px;">
-                                <a class="btn btn-lg btn-warning" href="{{route('permissions.show', $permission->id)}}"><i class="far fa-eye"></i> Ver</a>
-                                <a class="btn btn-lg btn-info" href="{{route('permissions.edit', $permission->id)}}"><i class="far fa-eye"></i> Edit</a>
-                                <a class="btn btn-lg btn-primary" href="{{route('profiles.permissions.profiles.index', $permission->id)}}"><i class="fa fa-lock"></i></a>
+                                <form action="{{route('profiles.permissions.detach', [$profile->id, $permission->id])}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-danger"><i class="fa fa-trash"></i> Remover</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

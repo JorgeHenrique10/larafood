@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ACL\PermissionController;
+use App\Http\Controllers\Admin\ACL\PermissionProfileController;
 use App\Http\Controllers\Admin\ACL\ProfileController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
@@ -23,6 +24,15 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function () {
+
+    /**
+     * Routes Permission x Perfil
+     */
+    Route::post('profiles/{profileId}/permissions/{permissionId}/detach', [PermissionProfileController::class, 'detach'])->name('profiles.permissions.detach');
+    Route::post('profiles/{id}/permissions', [PermissionProfileController::class, 'attach'])->name('profiles.permissions.attach');
+    Route::any('profiles/{id}/permissions/available', [PermissionProfileController::class, 'available'])->name('profiles.permissions.available');
+    Route::get('profiles/{id}/permissions', [PermissionProfileController::class, 'permissions'])->name('profiles.permissions.index');
+    Route::get('permissions/{id}/profiles', [PermissionProfileController::class, 'profiles'])->name('profiles.permissions.profiles.index');
 
     /**
      * Routes Permissions

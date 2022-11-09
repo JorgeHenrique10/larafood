@@ -41,6 +41,7 @@
                             <td style="width: 350px;">
                                 <a class="btn btn-lg btn-warning" href="{{route('profiles.show', $profile->id)}}"><i class="far fa-eye"></i> Ver</a>
                                 <a class="btn btn-lg btn-info" href="{{route('profiles.edit', $profile->id)}}"><i class="far fa-eye"></i> Edit</a>
+                                <a class="btn btn-lg btn-primary" href="{{route('profiles.permissions.index', $profile->id)}}"><i class="fa fa-lock"></i> Permissões</a>
                             </td>
                         </tr>
                     @endforeach

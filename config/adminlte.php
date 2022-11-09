@@ -313,17 +313,17 @@ return [
         // ],
         [
             'text' => 'Planos',
-            'url'  => 'admin/plans',
+            'url'  => 'admin/plans/',
             'icon' => 'fas fa-list-alt'
         ],
         [
             'text' => 'Perfis',
-            'url'  => 'admin/profiles',
+            'url'  => 'admin/profiles/',
             'icon' => 'fas fa-address-card'
         ],
         [
             'text' => 'Permissões',
-            'url'  => 'admin/permissions',
+            'url'  => 'admin/permissions/',
             'icon' => 'fas fa-lock'
         ],
         // [

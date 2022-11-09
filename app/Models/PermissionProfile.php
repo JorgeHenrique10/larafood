@@ -6,18 +6,13 @@ use App\Models\Trait\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class PermissionProfile extends Model
 {
     use HasFactory;
     use UuidTrait;
 
     public $incrementing = false;
     protected $keyType = 'uuid';
-    protected $table = 'permissions';
-    protected $fillable = ['name', 'description'];
-
-    public function profiles()
-    {
-        return $this->belongsToMany(Profile::class, 'permission_profile');
-    }
+    protected $table = 'permission_profile';
+    protected $fillable = ['permission_id', 'profile_id'];
 }

@@ -16,6 +16,11 @@ class Profile extends Model
     protected $table = 'profiles';
     protected $fillable = ['name', 'description'];
 
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'permission_profile');
+    }
+
     public function search($filter)
     {
         $records =  $this->query()
@@ -23,5 +28,20 @@ class Profile extends Model
             ->orWhere('description', 'LIKE', "%{$filter}%")->paginate(10);
 
         return $records;
+    }
+
+    public function permissionsAvailable($filter)
+    {
+        $permissions = Permission::query()->whereNotIn('id', function ($query) {
+            $query->select('permission_id');
+            $query->from('permission_profile');
+            $query->where('profile_id', $this->id);
+        })
+            ->where(function ($query) use ($filter) {
+                $query->where('name', 'LIKE', "%{$filter}%");
+            })
+            ->orderBy('created_at')->paginate(10);
+
+        return $permissions;
     }
 }
