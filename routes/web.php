@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ACL\PermissionController;
 use App\Http\Controllers\Admin\ACL\PermissionProfileController;
+use App\Http\Controllers\Admin\ACL\PlanProfileController;
 use App\Http\Controllers\Admin\ACL\ProfileController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
@@ -24,6 +25,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->group(function () {
+
+    /**
+     * Routes Plan x Profiles
+     */
+    Route::get('profiles/{id}/plans', [PlanProfileController::class, 'index'])->name('profiles.plans.index');
+    Route::any('profiles/{id}/plans/available', [PlanProfileController::class, 'available'])->name('profiles.plans.available');
+    Route::post('profiles/{id}/plans/attach', [PlanProfileController::class, 'attach'])->name('profiles.plans.attach');
+    Route::delete('profiles/{idProfile}/plans{idPlan}/attach', [PlanProfileController::class, 'detach'])->name('profiles.plans.detach');
 
     /**
      * Routes Permission x Perfil

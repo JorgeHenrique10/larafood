@@ -16,6 +16,11 @@ class Profile extends Model
     protected $table = 'profiles';
     protected $fillable = ['name', 'description'];
 
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class, 'plan_profile');
+    }
+
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'permission_profile');
@@ -43,5 +48,18 @@ class Profile extends Model
             ->orderBy('created_at')->paginate(10);
 
         return $permissions;
+    }
+
+    public function plansAvailable($filter)
+    {
+        $plans = Plan::query()->whereNotIn('id', function ($query) {
+            $query->select('plan_id');
+            $query->from('plan_profile');
+            $query->where('profile_id', $this->id);
+        })
+            ->where('name', 'LIKE', "%{$filter}%")
+            ->orderBy('created_at')->paginate(10);
+
+        return $plans;
     }
 }
