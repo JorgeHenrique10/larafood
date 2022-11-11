@@ -35,4 +35,18 @@ class Plan extends Model
 
         return $plans;
     }
+
+    public function profileAvailable($filter = null)
+    {
+        $profiles = Profile::query()->whereNotIn('id', function ($query) {
+            $query->select('profile_id');
+            $query->from('plan_profile');
+            $query->where('plan_id', $this->id);
+        })
+            ->where('name', 'LIKE', "%{$filter}%")
+            ->orderBy('created_at')
+            ->paginate(10);
+
+        return $profiles;
+    }
 }

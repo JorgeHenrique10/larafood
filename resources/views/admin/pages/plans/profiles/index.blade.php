@@ -1,47 +1,48 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', 'Perfis do Plano')
 
 @section('content_header')
     <div class="breadcrumb mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"> <a href="{{route('admin.index')}}">Dasboard</a></li>
             <li class="breadcrumb-item"> <a href="{{route('plans.index')}}">Planos</a></li>
+            <li class="breadcrumb-item active"> <a href="{{route('plans.profiles.index', $plan->id)}}">Plano - {{$plan->name}}</a></li>
         </ol>
     </div>
-    <h1>Planos <a href="{{route('plans.create')}}" class="btn btn-dark"><i class="fas fa-plus"></i>  Add </a></h1>
+    <h1>Perfis do Plano - <strong>{{$plan->name}}</strong> <a class="btn btn-dark" href="{{route('plans.profiles.available', $plan->id)}}"> Add</a> </h1>
 @stop
 
 @section('content')
     <div class="card">
+        @include('admin.includes.alerts')
         <div class="card-header">
-            <form class="form form-inline" action="{{route('plans.search')}}" method="POST">
+            {{-- <form class="form form-inline" action="{{route('profiles.permissions.profiles.index')}}" method="POST">
                 @csrf
                 <div class="flex form-group">
                     <input class="form-control" type="text" name="filter" value="{{ isset($filters) ? $filters['filter'] : '' }}">
                     <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i> Filtrar</button>
                 </div>
-            </form>
+            </form> --}}
         </div>
         <div class=" card-body">
             <table class="table table-condensed">
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Preço</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($plans as $plan)
+                    @foreach ($profiles as $profile)
                         <tr>
-                            <td>{{$plan->name}}</td>
-                            <td>R$ {{ number_format($plan->price, 2, ',', '.') }}</td>
-                            <td style="width: 450px;">
-                                <a class="btn btn-lg btn-warning" href="{{route('plans.show', $plan->id)}}"><i class="far fa-eye"></i> Ver</a>
-                                <a class="btn btn-lg btn-info" href="{{route('plans.edit', $plan->id)}}"><i class="far fa-eye"></i> Edit</a>
-                                <a class="btn btn-lg btn-primary" href="{{route('detail.plans.index', $plan->id)}}"><i class="fa fa-info-circle"></i> Detalhes</a>
-                                <a class="btn btn-lg btn-dark" href="{{route('plans.profiles.index', $plan->id)}}"><i class="fas fa-address-card"></i></a>
+                            <td>{{$profile->name}}</td>
+                            <td style="width: 350px;">
+                                <form action="{{route('plans.profiles.detach', [$plan->id, $profile->id])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-lg btn-danger"><i class="fa fa-trash"></i> Remover</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -50,9 +51,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {!! $plans->appends($filters)->links() !!}
+                {!! $profiles->appends($filters)->links() !!}
             @else
-                {!! $plans->links() !!}
+                {!! $profiles->links() !!}
             @endif
         </div>
     </div>

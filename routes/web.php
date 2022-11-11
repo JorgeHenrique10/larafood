@@ -34,6 +34,11 @@ Route::prefix('admin')->group(function () {
     Route::post('profiles/{id}/plans/attach', [PlanProfileController::class, 'attach'])->name('profiles.plans.attach');
     Route::delete('profiles/{idProfile}/plans{idPlan}/attach', [PlanProfileController::class, 'detach'])->name('profiles.plans.detach');
 
+    Route::get('plans/{id}/profiles', [PlanProfileController::class, 'profiles'])->name('plans.profiles.index');
+    Route::any('plans/{id}/profiles/available', [PlanProfileController::class, 'profileAvailables'])->name('plans.profiles.available');
+    Route::any('plans/{id}/profiles/attach', [PlanProfileController::class, 'profileAttach'])->name('plans.profiles.attach');
+    Route::any('plans/{idPlan}/profiles/{idProfile}/detach', [PlanProfileController::class, 'profileDetach'])->name('plans.profiles.detach');
+
     /**
      * Routes Permission x Perfil
      */
