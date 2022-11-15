@@ -23,7 +23,7 @@ class Plan extends Model
 
     public function details()
     {
-        return $this->hasMany(DetailPlan::class, 'plan_id');
+        return $this->hasMany(DetailPlan::class, 'plan_id')->orderBy('name');
     }
 
     public function search($filter = null)

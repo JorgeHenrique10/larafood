@@ -11,7 +11,7 @@
         <li class="breadcrumb-item active"> <a href="{{route('detail.plans.index', $plan->id)}}">Detalhes do Plano</a></li>
     </ol>
 </div>
-    <h1>Cadastro Detalhes do Plano - <b>{{$plan->name}}</b> <a class="btn btn-dark" href="{{route('detail.plans.create', $plan->id)}}"><i class="fa fa-arrow-left"></i> Voltar</a> </h1>
+    <h1>Cadastro Detalhes do Plano - <b>{{$plan->name}}</b> <a class="btn btn-dark" href="{{route('detail.plans.index', $plan->id)}}"><i class="fa fa-arrow-left"></i> Voltar</a> </h1>
 @stop
 
 @section('content')
