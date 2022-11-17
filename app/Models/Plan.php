@@ -16,6 +16,11 @@ class Plan extends Model
     protected $table = 'plans';
     protected $fillable = ['name', 'description', 'url', 'price'];
 
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class, 'tenants');
+    }
+
     public function profiles()
     {
         return $this->belongsToMany(Profile::class, 'plan_profile');
