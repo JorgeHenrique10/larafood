@@ -20,21 +20,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+/**
+ * Sites
+ */
 Route::get('/', [SiteController::class, 'index'])->name('site.home');
+Route::get('/plan/{id}', [SiteController::class, 'plan'])->name('plan.subscription');
 
 Route::prefix('admin')
     ->middleware('auth')
