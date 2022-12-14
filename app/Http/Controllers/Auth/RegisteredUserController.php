@@ -40,8 +40,8 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'cnpj' => ['required', 'unique:tenants'],
-            // 'tenant' => ['required', 'unique:tenants']
+            'cnpj' => ['required', 'unique:tenants', 'string', 'min:14', 'max:14'],
+            'tenant' => ['required', 'unique:tenants,name', 'string']
         ]);
 
         if (!$plan = session('plan'))

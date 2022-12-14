@@ -5,9 +5,11 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Trait\UuidTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -47,4 +49,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Tenant
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function search($filter)
+    {
+        $records =  $this->query()
+            ->where(function ($query) use ($filter) {
+                $query->where('name', 'LIKE', "%{$filter}%");
+                $query->orWhere('email', '=', $filter);
+            })->tenantUser()->paginate(10);
+
+        return $records;
+    }
+
+    public function scopeTenantUser(Builder $query)
+    {
+        return $query->where('tenant_id', Auth::user()->tenant_id);
+    }
 }

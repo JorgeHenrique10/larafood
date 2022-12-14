@@ -326,6 +326,11 @@ return [
             'url'  => 'admin/permissions/',
             'icon' => 'fas fa-lock'
         ],
+        [
+            'text' => 'Usuários',
+            'url'  => 'admin/users/',
+            'icon' => 'fas fa-user'
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
