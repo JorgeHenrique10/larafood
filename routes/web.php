@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ACL\PermissionController;
 use App\Http\Controllers\Admin\ACL\PermissionProfileController;
 use App\Http\Controllers\Admin\ACL\PlanProfileController;
 use App\Http\Controllers\Admin\ACL\ProfileController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\UserController;
@@ -35,6 +36,12 @@ Route::get('/plan/{id}', [SiteController::class, 'plan'])->name('plan.subscripti
 Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
+
+        /**
+         * Routes Category
+         */
+        Route::any('categories/search', [CategoryController::class, 'search'])->name('categories.search');
+        Route::resource('categories', CategoryController::class);
 
         /**
          * Routes Users

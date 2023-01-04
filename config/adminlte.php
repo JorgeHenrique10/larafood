@@ -331,6 +331,11 @@ return [
             'url'  => 'admin/users/',
             'icon' => 'fas fa-user'
         ],
+        [
+            'text' => 'Categorias',
+            'url'  => 'admin/categories/',
+            'icon' => 'fas layer-group'
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
