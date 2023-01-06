@@ -14,10 +14,11 @@ class CategoryObserver
      * @param  \App\Models\Category  $category
      * @return void
      */
-    // public function creating(Category $category)
-    // {
-    //     $category->url = Str::kebab($category->name);
-    // }
+    public function creating(Category $category)
+    {
+        $category->id = (string) Str::uuid();
+        $category->url = Str::kebab($category->name);
+    }
 
     /**
      * Handle the Category "updating" event.

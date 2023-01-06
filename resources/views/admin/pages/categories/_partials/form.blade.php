@@ -6,8 +6,7 @@
 </div>
 <div class="form-group">
     <label for="description">Descrição</label>
-    <input type="description" name="description" class="form-control" placeholder="Descrição" value="{{$user->description ?? old('description')}}">
-</div>
+    <textarea type="text" cols="30" rows="5" name="description" class="form-control" placeholder="Descrição" value="{{$user->description ?? old('description')}}"></textarea></div>
 <div class="form-group">
     <button type="submit" class="btn btn-dark"><i class="far fa-save"></i> Enviar</button>
 </div>
