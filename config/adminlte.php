@@ -334,7 +334,7 @@ return [
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories/',
-            'icon' => 'fas layer-group'
+            'icon' => 'fas fa-layer-group'
         ],
         // [
         //     'text'        => 'pages',
