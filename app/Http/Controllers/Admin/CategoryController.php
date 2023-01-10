@@ -57,7 +57,12 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = $this->repository->query()->findOrFail($id);
+
+        if (!$category)
+            return redirect()->back();
+
+        return view('admin.pages.categories.show', ['category' => $category]);
     }
 
     /**
@@ -68,7 +73,12 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = $this->repository->query()->findOrFail($id);
+
+        if (!$category)
+            return redirect()->back();
+
+        return view('admin.pages.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -78,9 +88,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = $this->repository->query()->findOrFail($id);
+
+        if (!$category)
+            return redirect()->back();
+
+        $category->update($request->only(['name', 'description']));
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -91,6 +108,25 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = $this->repository->query()->findOrFail($id);
+
+        if (!$category)
+            return redirect()->back();
+
+        $category->delete();
+
+        return redirect()
+            ->route('categories.index')
+            ->with('message', 'Categoria deletado com sucesso.');
+    }
+
+    public function search(Request $request)
+    {
+        $categories = $this->repository->search($request->get('filter'));
+        $filters = $request->get('filter') ? $request->except('_token') : ['filter' => null];
+        return view('admin.pages.categories.index', [
+            'categories' => $categories,
+            'filters' => $filters
+        ]);
     }
 }

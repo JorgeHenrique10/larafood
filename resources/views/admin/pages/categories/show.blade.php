@@ -1,35 +1,32 @@
 @extends('adminlte::page')
 
-@section('title', 'Detalhes do Usuário')
+@section('title', 'Detalhes Categoria')
 
 @section('content_header')
-    <h1>Detalhes do Usuário <a class="btn btn-dark" href="{{route('users.index')}}"><i class="fas fa-arrow-left"></i> Voltar</a> </h1>
+    <h1>Detalhes Categoria <a class="btn btn-dark" href="{{route('categories.index')}}"><i class="fas fa-arrow-left"></i> Voltar</a> </h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            Detalhes do Usuário <b>{{$user->name}}</b>
+            Detalhes Categoria <b>{{$category->name}}</b>
         </div>
         <div class=" card-body">
             <ul>
                 <li>
-                    <strong> Nome: </strong>{{$user->name}}
+                    <strong> Nome: </strong>{{$category->name}}
                 </li>
                 <li>
-                    <strong> Email: </strong>{{$user->email}}
-                </li>
-                <li>
-                    <strong> Empresa: </strong>{{$user->tenant->name}}
+                    <strong> Descrição: </strong>{{$category->description}}
                 </li>
             </ul>
             @include('admin.includes.alerts')
         </div>
         <div class="card-footer">
-            <form action="{{route('users.destroy', $user->id)}}" method="POST">
+            <form action="{{route('categories.destroy', $category->id)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Deletar {{$user->name}} </button>
+                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Deletar {{$category->name}} </button>
             </form>
         </div>
     </div>

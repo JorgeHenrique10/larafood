@@ -17,16 +17,12 @@ class Category extends Model
     protected $table = 'categories';
     protected $fillable = ['name', 'description', 'url', 'tenant_id'];
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
+    public function search($filter)
+    {
+        $records =  $this->query()
+            ->where('name', 'LIKE', "%{$filter}%")
+            ->orWhere('description', 'LIKE', "%{$filter}%")->paginate(10);
 
-    //     static::creating(function ($category) {
-    //         $category->url = Str::kebab($category->name);
-    //     });
-
-    //     static::updating(function ($category) {
-    //         $category->url = Str::kebab($category->name);
-    //     });
-    // }
+        return $records;
+    }
 }
