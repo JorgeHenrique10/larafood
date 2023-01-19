@@ -25,4 +25,9 @@ class Category extends Model
 
         return $records;
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
