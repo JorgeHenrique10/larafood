@@ -337,9 +337,9 @@ return [
             'icon' => 'fas fa-layer-group'
         ],
         [
-            'text' => 'Produto',
+            'text' => 'Produtos',
             'url'  => 'admin/products/',
-            'icon' => 'fas fa-layer-group'
+            'icon' => 'fas fa-bullseye'
         ],
         // [
         //     'text'        => 'pages',

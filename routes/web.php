@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\ACL\PermissionProfileController;
 use App\Http\Controllers\Admin\ACL\PlanProfileController;
 use App\Http\Controllers\Admin\ACL\ProfileController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CategoryProductController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +39,20 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
 
+        /**
+         * Routes Category x Product
+         */
+        Route::delete('products/{profileId}/categories/{permissionId}/detach', [CategoryProductController::class, 'detach'])->name('products.categories.detach');
+        Route::post('products/{id}/categories', [CategoryProductController::class, 'attach'])->name('products.categories.attach');
+        Route::any('products/{id}/categories/available', [CategoryProductController::class, 'available'])->name('products.categories.available');
+        Route::get('products/{id}/categories', [CategoryProductController::class, 'categories'])->name('products.categories.index');
+        Route::get('categories/{id}/products', [CategoryProductController::class, 'products'])->name('products.categories.products.index');
+
+        /**
+         * Routes Category
+         */
+        Route::any('products/search', [ProductController::class, 'search'])->name('products.search');
+        Route::resource('products', ProductController::class);
         /**
          * Routes Category
          */

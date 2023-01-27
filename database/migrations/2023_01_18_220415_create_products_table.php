@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('flag')->uniqid();
             $table->double('price', 10, 2);
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable();
 
             $table->timestamps();
         });

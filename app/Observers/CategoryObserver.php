@@ -26,8 +26,8 @@ class CategoryObserver
      * @param  \App\Models\Category  $category
      * @return void
      */
-    // public function updating(Category $category)
-    // {
-    //     $category->url = Str::kebab($category->name);
-    // }
+    public function updating(Category $category)
+    {
+        $category->url = Str::kebab($category->name);
+    }
 }
