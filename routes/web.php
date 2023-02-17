@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryProductController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,13 @@ Route::get('/plan/{id}', [SiteController::class, 'plan'])->name('plan.subscripti
 Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
+
+
+        /**
+         * Routes Table
+         */
+        Route::any('tables/search', [TableController::class, 'search'])->name('tables.search');
+        Route::resource('tables', TableController::class);
 
         /**
          * Routes Category x Product

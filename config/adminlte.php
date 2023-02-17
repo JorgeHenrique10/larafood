@@ -341,6 +341,11 @@ return [
             'url'  => 'admin/products/',
             'icon' => 'fas fa-bullseye'
         ],
+        [
+            'text' => 'Mesas',
+            'url'  => 'admin/tables/',
+            'icon' => 'fa fa-tablet'
+        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
