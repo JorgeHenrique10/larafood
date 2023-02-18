@@ -12,6 +12,7 @@ class CategoryProductController extends Controller
 {
     public function __construct(private Category $category, private Product $product)
     {
+        $this->middleware(['can:category']);
     }
 
     public function categories($id)

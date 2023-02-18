@@ -10,8 +10,10 @@ use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TableController;
+use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Site\SiteController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +42,17 @@ Route::prefix('admin')
     ->middleware('auth')
     ->group(function () {
 
+        Route::get('test-acl', function () {
+            $teste =  Auth::user()->isAdmin();
+
+            dd($teste);
+        });
+
+        /**
+         * Routes Product
+         */
+        Route::any('tenants/search', [TenantController::class, 'search'])->name('tenants.search');
+        Route::resource('tenants', TenantController::class);
 
         /**
          * Routes Table
@@ -57,10 +70,11 @@ Route::prefix('admin')
         Route::get('categories/{id}/products', [CategoryProductController::class, 'products'])->name('products.categories.products.index');
 
         /**
-         * Routes Category
+         * Routes Product
          */
         Route::any('products/search', [ProductController::class, 'search'])->name('products.search');
         Route::resource('products', ProductController::class);
+
         /**
          * Routes Category
          */

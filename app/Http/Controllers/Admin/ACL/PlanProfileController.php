@@ -12,6 +12,7 @@ class PlanProfileController extends Controller
 {
     public function __construct(private Plan $plan, private Profile $profile)
     {
+        $this->middleware(['can:profile']);
     }
 
     public function index(Request $request, $id)

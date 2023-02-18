@@ -19,6 +19,11 @@ class Tenant extends Model
         'expires_at', 'subscription_id', 'subscription_active', 'subscription_suspended'
     ];
 
+    public function search($filter)
+    {
+        return $this->query()->where('name', 'like', "%$filter%")->paginate(10);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class, 'tenant_id');

@@ -312,39 +312,52 @@ return [
         //     'can'  => 'manage-blog',
         // ],
         [
+            'text' => 'Empresas',
+            'url'  => 'admin/tenants/',
+            'icon' => 'fas fa-building',
+            'can' => 'tenant'
+        ],
+        [
             'text' => 'Planos',
             'url'  => 'admin/plans/',
-            'icon' => 'fas fa-list-alt'
+            'icon' => 'fas fa-list-alt',
+            'can' => 'plan'
         ],
         [
             'text' => 'Perfis',
             'url'  => 'admin/profiles/',
-            'icon' => 'fas fa-address-card'
+            'icon' => 'fas fa-address-card',
+            'can' => 'profile'
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permissions/',
-            'icon' => 'fas fa-lock'
+            'icon' => 'fas fa-lock',
+            'can' => 'permission'
         ],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users/',
-            'icon' => 'fas fa-user'
+            'icon' => 'fas fa-user',
+            'can' => 'user'
         ],
         [
             'text' => 'Categorias',
             'url'  => 'admin/categories/',
-            'icon' => 'fas fa-layer-group'
+            'icon' => 'fas fa-layer-group',
+            'can' => 'category'
         ],
         [
             'text' => 'Produtos',
             'url'  => 'admin/products/',
-            'icon' => 'fas fa-bullseye'
+            'icon' => 'fas fa-bullseye',
+            'can' => 'product'
         ],
         [
             'text' => 'Mesas',
             'url'  => 'admin/tables/',
-            'icon' => 'fa fa-tablet'
+            'icon' => 'fa fa-tablet',
+            'can' => 'table'
         ],
         // [
         //     'text'        => 'pages',

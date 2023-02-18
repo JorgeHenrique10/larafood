@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Trait\UserACLTrait;
 use App\Models\Trait\UuidTrait;
+use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +16,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UuidTrait;
+    use HasApiTokens, HasFactory, Notifiable, UuidTrait, UserACLTrait;
 
     public $incrementing = false;
     public $keyType = 'uuid';
