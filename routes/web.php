@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\ACL\PermissionController;
 use App\Http\Controllers\Admin\ACL\PermissionProfileController;
 use App\Http\Controllers\Admin\ACL\PlanProfileController;
 use App\Http\Controllers\Admin\ACL\ProfileController;
+use App\Http\Controllers\Admin\ACL\RoleController;
+use App\Http\Controllers\Admin\ACL\RolePermissionController;
+use App\Http\Controllers\Admin\ACL\RoleUserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CategoryProductController;
 use App\Http\Controllers\Admin\DetailPlanController;
@@ -47,6 +50,30 @@ Route::prefix('admin')
 
             dd($teste);
         });
+
+        /**
+         * Routes Role x User
+         */
+        Route::post('roles/{roleId}/users/{userId}/detach', [RoleUserController::class, 'detach'])->name('roles.users.detach');
+        Route::post('roles/{id}/users', [RoleUserController::class, 'attach'])->name('roles.users.attach');
+        Route::any('roles/{id}/users/available', [RoleUserController::class, 'available'])->name('roles.users.available');
+        Route::get('roles/{id}/users', [RoleUserController::class, 'users'])->name('roles.users.index');
+        Route::get('users/{id}/roles', [RoleUserController::class, 'roles'])->name('roles.users.roles.index');
+
+        /**
+         * Routes Role x Permission
+         */
+        Route::post('roles/{roleId}/permissions/{permissionId}/detach', [RolePermissionController::class, 'detach'])->name('roles.permissions.detach');
+        Route::post('roles/{id}/permissions', [RolePermissionController::class, 'attach'])->name('roles.permissions.attach');
+        Route::any('roles/{id}/permissions/available', [RolePermissionController::class, 'available'])->name('roles.permissions.available');
+        Route::get('roles/{id}/permissions', [RolePermissionController::class, 'permissions'])->name('roles.permissions.index');
+        Route::get('permissions/{id}/roles', [RolePermissionController::class, 'roles'])->name('roles.permissions.roles.index');
+
+        /**
+         * Routes Role
+         */
+        Route::any('roles/search', [RoleController::class, 'search'])->name('roles.search');
+        Route::resource('roles', RoleController::class);
 
         /**
          * Routes Product

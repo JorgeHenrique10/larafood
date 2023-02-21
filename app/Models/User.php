@@ -71,8 +71,25 @@ class User extends Authenticatable
         return $records;
     }
 
+    public function usersAvailable($filter)
+    {
+        $roles = $this->query()->whereNotIn('id', function ($query) {
+            $query->select('role_id');
+            $query->from('role_user');
+            $query->where('role_id', $this->id);
+        })
+            ->where('name', 'LIKE', "%{$filter}%")
+            ->orderBy('created_at')->paginate(10);
+
+        return $roles;
+    }
+
     public function scopeTenantUser(Builder $query)
     {
         return $query->where('tenant_id', Auth::user()->tenant_id);
+    }
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
     }
 }

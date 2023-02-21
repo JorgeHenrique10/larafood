@@ -1,21 +1,23 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuários')
+@section('title', 'Permissões do Cargo')
 
 @section('content_header')
     <div class="breadcrumb mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"> <a href="{{route('admin.index')}}">Dasboard</a></li>
-            <li class="breadcrumb-item"> <a href="{{route('users.index')}}">Usuários</a></li>
+            <li class="breadcrumb-item"> <a href="{{route('roles.index')}}">Cargo</a></li>
+            <li class="breadcrumb-item active"> <a href="{{route('roles.permissions.index', $role->id)}}">Cargo {{$role->name}}</a></li>
         </ol>
     </div>
-    <h1>Usuários <a href="{{route('users.create')}}" class="btn btn-dark"><i class="fas fa-plus"></i>  Add </a></h1>
+    <h1>Permissões do Cargo <strong>{{$role->name}}</strong> <a href="{{route('roles.permissions.available', $role->id)}}" class="btn btn-dark"><i class="fas fa-plus"></i>  Add Permissão</a></h1>
 @stop
 
 @section('content')
     <div class="card">
+        @include('admin.includes.alerts')
         <div class="card-header">
-            <form class="form form-inline" action="{{route('users.search')}}" method="POST">
+            <form class="form form-inline" action="{{route('roles.search')}}" method="POST">
                 @csrf
                 <div class="flex form-group">
                     <input class="form-control" type="text" name="filter" value="{{ isset($filters) ? $filters['filter'] : '' }}">
@@ -28,19 +30,18 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>E-mail</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($permissions as $permission)
                         <tr>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td style="width: 450px;">
-                                <a class="btn btn-lg btn-warning" href="{{route('users.show', $user->id)}}"><i class="far fa-eye"></i> Ver</a>
-                                <a class="btn btn-lg btn-info" href="{{route('users.edit', $user->id)}}"><i class="far fa-eye"></i> Edit</a>
-                                <a class="btn btn-lg btn-primary" href="{{route('roles.users.index', $user->id)}}"><i class="fas fa-address-card"></i> Cargos</a>
+                            <td>{{$permission->name}}</td>
+                            <td style="width: 350px;">
+                                <form action="{{route('roles.permissions.detach', [$role->id, $permission->id])}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-lg btn-danger"><i class="fa fa-trash"></i> Remover</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -49,9 +50,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {!! $users->appends($filters)->links() !!}
+                {!! $permissions->appends($filters)->links() !!}
             @else
-                {!! $users->links() !!}
+                {!! $permissions->links() !!}
             @endif
         </div>
     </div>
