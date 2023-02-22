@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\TenantCreated;
+use App\Listeners\AddRoleTenant;
 use App\Models\Plan;
 use App\Observers\PlanObserver;
 use Illuminate\Auth\Events\Registered;
@@ -20,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        TenantCreated::class => [
+            AddRoleTenant::class,
+        ],
     ];
 
     /**
@@ -29,7 +34,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Plan::observe(PlanObserver::class);
     }
 
     /**
