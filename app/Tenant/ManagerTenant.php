@@ -8,12 +8,12 @@ class ManagerTenant
 {
     public function getUuidTenant()
     {
-        return Auth::user()->tenant_id;
+        return  Auth::check() ? Auth::user()->tenant_id : '';
     }
 
     public function getTenant()
     {
-        return Auth::user()->tenant;
+        return Auth::check() ? Auth::user()->tenant : '';
     }
 
     public function isAdmin(): bool

@@ -10,6 +10,7 @@ class TenantService
 {
     private $plan, $data = [];
 
+
     public function __construct(Plan $plan, array $data)
     {
         $this->plan = $plan;
@@ -25,7 +26,7 @@ class TenantService
             'name' => $data['tenant'],
             'url' => Str::kebab($data['cnpj']),
             'email' => $data['email'],
-            'logo' => Str::kebab($data['cnpj']),
+            'logo' => null,
             'subscription' => now(),
             'expires_at' => now()->addDays(7),
         ]);

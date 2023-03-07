@@ -28,7 +28,7 @@ class TenantRequest extends FormRequest
             'name' => ['required', "unique:tenants,name,$id,id", 'min:3', 'max:255'],
             'email' => ['required', "unique:tenants,email,$id,id", 'email'],
             'cnpj' => ['required', 'digits:14', "unique:tenants,cnpj,$id,id"],
-            'logo' => ['required', 'image', 'mimes:png,jpg'],
+            'logo' => ['nullable', 'image', 'mimes:png,jpg'],
             'active' => ['required', 'in:Y,N'],
             'subscription' => ['nullable', 'date'],
             'expires_at' => ['nullable', 'date'],
