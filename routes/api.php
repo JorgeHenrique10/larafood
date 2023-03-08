@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TableController;
@@ -26,6 +27,12 @@ Route::group([
     'prefix' => 'v1',
     'namespace' => 'Api'
 ], function () {
+
+    /**
+     * Routes Register
+     **/
+    Route::post('clients', [RegisterController::class, 'store']);
+
     /**
      * Routes Products
      **/
