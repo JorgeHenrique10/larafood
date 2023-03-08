@@ -20,6 +20,7 @@ class ClientService
 
     public function storeClient(array $data)
     {
+        $data['password'] = bcrypt($data['password']);
         return $this->repository->storeClient($data);
     }
 }
