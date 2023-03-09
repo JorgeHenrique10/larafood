@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TableController;
 use App\Http\Controllers\Api\TenantController;
@@ -25,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('auth', [AuthController::class, 'auth']);
+
+Route::get('order/{identify}', [OrderController::class, 'show']);
+Route::post('order', [OrderController::class, 'store']);
 
 Route::group([
     'middleware' => 'auth:sanctum'
