@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('tenant_id')->nullable()->constrained('tenants')->onDelete('cascade');
             $table->foreignUuid('client_id')->nullable()->constrained('clients');
+            $table->foreignUuid('table_id')->nullable()->constrained('tables');
             $table->string('identify')->unique();
             $table->double('total', 10, 2);
             $table->enum('status', ['open', 'done', 'rejected', 'working', 'canceled', 'delivering']);

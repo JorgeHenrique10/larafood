@@ -9,7 +9,7 @@ class OrderObserver
 {
 
     /**
-     * Handle the Order "created" event.
+     * Handle the Order "creating" event.
      *
      * @param  \App\Models\Order  $order
      * @return void

@@ -27,20 +27,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('auth', [AuthController::class, 'auth']);
 
-Route::get('order/{identify}', [OrderController::class, 'show']);
-Route::post('order', [OrderController::class, 'store']);
-
 Route::group([
-    'middleware' => 'auth:sanctum'
+    'middleware' => 'auth:sanctum',
+    'prefix' => 'auth'
 ], function () {
-    Route::post('auth/me', [AuthController::class, 'me']);
-    Route::post('auth/logout', [AuthController::class, 'logout']);
+    Route::post('me', [AuthController::class, 'me']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('v1/orders/me', [OrderController::class, 'myOrders']);
+    Route::post('v1/orders', [OrderController::class, 'store']);
 });
 
 Route::group([
     'prefix' => 'v1',
     'namespace' => 'Api'
 ], function () {
+
+    /**
+     * Routes Orders
+     **/
+    Route::get('orders/{identify}', [OrderController::class, 'show']);
+    Route::post('orders', [OrderController::class, 'store']);
 
     /**
      * Routes Register

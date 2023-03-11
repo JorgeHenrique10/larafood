@@ -26,7 +26,10 @@ class OrderRequest extends FormRequest
         return [
             'tenant_id' => ['required', 'exists:tenants,id'],
             'table_id' => ['nullable', 'exists:tables,id'],
-            'comment' => ['nullable', 'max:1000']
+            'comment' => ['nullable', 'max:1000'],
+            'products' => ['required'],
+            'products.*.id' => ['required', 'exists:products,id'],
+            'products.*.qtd' => ['required', 'integer'],
         ];
     }
 }

@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\RolePermission;
 use App\Models\Table;
 use App\Observers\CategoryObserver;
+use App\Observers\OrderObserver;
 use App\Observers\ProductObserver;
 use App\Observers\RoleObserver;
 use App\Observers\RolePermissionObserver;
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         Table::observe(TableObserver::class);
         Role::observe(RoleObserver::class);
+        Order::observe(OrderObserver::class);
         RolePermission::observe(RolePermissionObserver::class);
         Paginator::useBootstrap();
     }

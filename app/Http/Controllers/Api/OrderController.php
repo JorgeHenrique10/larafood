@@ -19,7 +19,22 @@ class OrderController extends Controller
         $order = $this->orderService->storeOrder($request->all());
         return new OrderResource($order);
     }
-    public function show()
+    public function show($identify)
     {
+        $order = $this->orderService->getOrderByIdentity($identify);
+
+        if (!$order)
+            return response()->json(['message' => 'Order not found!'], 404);
+
+        return new OrderResource($order);
+    }
+    public function myOrders()
+    {
+        $orders = $this->orderService->getMyOrders();
+
+        if (!$orders)
+            return response()->json(['message' => 'You have no order!'], 404);
+
+        return OrderResource::collection($orders);
     }
 }
