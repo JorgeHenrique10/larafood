@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\EvaluationOrderController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\TableController;
@@ -33,6 +34,7 @@ Route::group([
 ], function () {
     Route::post('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('evaluationOrder', [EvaluationOrderController::class, 'store']);
     Route::get('v1/orders/me', [OrderController::class, 'myOrders']);
     Route::post('v1/orders', [OrderController::class, 'store']);
 });

@@ -16,4 +16,9 @@ class Client extends Authenticatable
     protected $keyType = "uuid";
     protected $table = 'clients';
     protected $fillable = ['name', 'email', 'email_verified_at', 'password'];
+
+    public function evaluations()
+    {
+        return $this->hasMany(EvaluationOrder::class);
+    }
 }
