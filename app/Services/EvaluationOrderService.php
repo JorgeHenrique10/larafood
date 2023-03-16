@@ -14,6 +14,18 @@ class EvaluationOrderService
     ) {
     }
 
+    public function getEvaluationOrderById(string $id)
+    {
+        return $this->evaluationOrderRepository->getEvaluationOrderById($id);
+    }
+
+    public function getEvaluationsByOrderIdentify($identifyOrder)
+    {
+        $orderId = $this->getOrderByIdentify($identifyOrder);
+
+        return $this->evaluationOrderRepository->getEvaluationsOrderByOrderId($orderId);
+    }
+
     public function storeEvaluationOrder(string $identifyOrder, int $stars, string $comment = null)
     {
         $clientId = $this->getClientIdAuth();

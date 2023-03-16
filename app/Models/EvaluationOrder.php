@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Trait\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EvaluationOrder extends Model
 {
-    use HasFactory;
+    use HasFactory, UuidTrait;
 
     public $incrementing = false;
     protected $keyType = 'uuid';

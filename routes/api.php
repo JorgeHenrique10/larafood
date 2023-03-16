@@ -34,7 +34,9 @@ Route::group([
 ], function () {
     Route::post('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('evaluationOrder', [EvaluationOrderController::class, 'store']);
+    Route::get('evaluationOrders/order/{identifyOrder}', [EvaluationOrderController::class, 'evaluationsByOrderIdentify']);
+    Route::get('evaluationOrders/{id}', [EvaluationOrderController::class, 'show']);
+    Route::post('evaluationOrders', [EvaluationOrderController::class, 'store']);
     Route::get('v1/orders/me', [OrderController::class, 'myOrders']);
     Route::post('v1/orders', [OrderController::class, 'store']);
 });

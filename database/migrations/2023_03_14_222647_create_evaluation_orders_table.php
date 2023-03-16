@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('evaluation_order', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('cliente_id')->constrained('clients')->onDelete('cascade');
+            $table->foreignUuid('client_id')->constrained('clients')->onDelete('cascade');
             $table->foreignUuid('order_id')->constrained('orders')->onDelete('cascade');
             $table->integer('stars');
             $table->text('comment')->nullable();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evaluation_orders');
+        Schema::dropIfExists('evaluation_order');
     }
 };

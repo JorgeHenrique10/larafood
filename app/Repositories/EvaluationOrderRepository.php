@@ -34,7 +34,7 @@ class EvaluationOrderRepository implements EvaluationOrderRepositoryInterface
         return $this->evaluationOrder->query()->where('client_id', $clientId)->paginate();
     }
 
-    public function getEvaluationsOrderById(string $orderEvaluationId)
+    public function getEvaluationOrderById(string $orderEvaluationId)
     {
         return $this->evaluationOrder->query()->where('id', $orderEvaluationId)->first();
     }

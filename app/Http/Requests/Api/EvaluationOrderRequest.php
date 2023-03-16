@@ -19,10 +19,13 @@ class EvaluationOrderRequest extends FormRequest
         if (!$client = Auth::user())
             return false;
 
-        $orderRepository = new OrderRepositoryInterface();
-        $orderRepository->getOrderByIdentify($this->identify);
+        $orderRepository = app(OrderRepositoryInterface::class);
+        $order = $orderRepository->getOrderByIdentify($this->identityOrder);
 
-        if ($orderRepository->client_id == $client->id)
+        if (!$order)
+            return false;
+
+        if ($order->client_id == $client->id)
             return true;
 
         return false;
