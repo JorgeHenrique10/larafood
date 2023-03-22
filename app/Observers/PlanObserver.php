@@ -15,7 +15,8 @@ class PlanObserver
      */
     public function creating(Plan $plan)
     {
-        $plan->url = Str::kebab($plan->title);
+        $plan->id = Str::uuid();
+        $plan->url = Str::kebab($plan->name);
     }
 
     /**
@@ -26,6 +27,6 @@ class PlanObserver
      */
     public function updating(Plan $plan)
     {
-        $plan->url = Str::kebab($plan->title);
+        $plan->url = Str::kebab($plan->name);
     }
 }

@@ -16,7 +16,7 @@ class TableController extends Controller
 
     public function index(TenantFormRequest $request)
     {
-        $tables = $this->tableService->getTablesByTenantUuid($request->only('tenant_id'));
+        $tables = $this->tableService->getTablesByTenantUuid($request->get('tenant_id'));
 
         return TableResource::collection($tables);
     }

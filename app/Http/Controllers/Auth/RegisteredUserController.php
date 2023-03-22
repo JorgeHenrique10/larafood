@@ -55,8 +55,7 @@ class RegisteredUserController extends Controller
         $user = $tenantService->userStore($tenant);
 
         event(new Registered($user));
-
-        Auth::login($user);
+        Auth::loginUsingId($user->id);
 
         event(new TenantCreated($user));
 

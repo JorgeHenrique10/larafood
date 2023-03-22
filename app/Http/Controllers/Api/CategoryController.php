@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function index(TenantFormRequest $request)
     {
-        $categories = $this->categoryService->getCategoriesByTenantUuid($request->only('tenant_id'));
+        $categories = $this->categoryService->getCategoriesByTenantUuid($request->get('tenant_id'));
 
         return CategoryResource::collection($categories);
     }

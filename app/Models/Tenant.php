@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     use HasFactory;
-    use UuidTrait;
+    // use UuidTrait;
 
     public $incrementing = false;
     protected $keyType = 'uuid';

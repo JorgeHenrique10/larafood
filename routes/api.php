@@ -28,6 +28,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('auth', [AuthController::class, 'auth']);
 
+/**
+ * Routes Authenticates
+ */
+
 Route::group([
     'middleware' => 'auth:sanctum',
     'prefix' => 'auth'
@@ -40,6 +44,10 @@ Route::group([
     Route::get('v1/orders/me', [OrderController::class, 'myOrders']);
     Route::post('v1/orders', [OrderController::class, 'store']);
 });
+
+/**
+ * Routes Public
+ */
 
 Route::group([
     'prefix' => 'v1',
