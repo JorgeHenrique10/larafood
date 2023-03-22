@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
 
         $categories = $request->get('categories', []);
-        $products = $this->productService->getProductsByTenantUuid($request->only('tenant_id'), $categories);
+        $products = $this->productService->getProductsByTenantUuid($request->get('tenant_id'), $categories);
         return ProductResource::collection($products);
     }
 

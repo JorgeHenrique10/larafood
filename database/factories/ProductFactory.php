@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'tenant_id' => Tenant::factory()->make(),
+            'tenant_id' => Tenant::factory()->create(),
             'title' => Str::random(8),
             'price' => 10.00,
             'description' => fake()->sentence()
