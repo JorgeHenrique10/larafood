@@ -26,7 +26,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('auth', [AuthController::class, 'auth']);
+
+/**
+ * Routes Register
+ **/
+Route::post('auth/register', [RegisterController::class, 'store']);
+Route::post('auth/token', [AuthController::class, 'auth']);
 
 /**
  * Routes Authenticates
@@ -36,7 +41,7 @@ Route::group([
     'middleware' => 'auth:sanctum',
     'prefix' => 'auth'
 ], function () {
-    Route::post('me', [AuthController::class, 'me']);
+    Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('evaluationOrders/order/{identifyOrder}', [EvaluationOrderController::class, 'evaluationsByOrderIdentify']);
     Route::get('evaluationOrders/{id}', [EvaluationOrderController::class, 'show']);
@@ -59,11 +64,6 @@ Route::group([
      **/
     Route::get('orders/{identify}', [OrderController::class, 'show']);
     Route::post('orders', [OrderController::class, 'store']);
-
-    /**
-     * Routes Register
-     **/
-    Route::post('clients', [RegisterController::class, 'store']);
 
     /**
      * Routes Products

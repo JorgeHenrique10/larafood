@@ -19,13 +19,13 @@ class AuthController extends Controller
             'device_name' => ['required', 'min:3', 'max:50']
         ]);
 
-        $client = Client::where('email', $request->email)->first();
+        $client = Client::where('email', $request->get('email'))->first();
 
-        if (!Hash::check($request->password, $client->password)) {
-            return response()->json(['message' => 'Credenciais Inválidas'], 404);
+        if (!Hash::check($request->get('password'), $client->password)) {
+            return response()->json(['message' => trans('messages.invalid_credentials')], 404);
         }
 
-        $token = $client->createToken($request->device_name)->plainTextToken;
+        $token = $client->createToken($request->get('device_name'))->plainTextToken;
 
         return response()->json(['token' => $token], 200);
     }

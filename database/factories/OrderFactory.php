@@ -21,7 +21,7 @@ class OrderFactory extends Factory
         return [
             'tenant_id' => Tenant::factory()->make(),
             'client_id' => Client::factory()->make(),
-            'identify' => fake()->unique()->rand(00000000, 99999999),
+            'identify' => fake()->unique()->text(10),
             'total' => 150.50,
             'status' => 'open'
         ];
