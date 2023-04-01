@@ -12,11 +12,13 @@ class TenantObserver
 
     public function creating(Model $model)
     {
-        // $managerTenant = app(ManagerTenant::class);
-        // $identity = $managerTenant->getUuidTenant();
+        $managerTenant = app(ManagerTenant::class);
+        $identity = $managerTenant->getUuidTenant();
 
-        // if ($identity)
-        //     $model->tenant_id = $identity;
+        if ($identity) {
+            $model->tenant_id = $identity;
+        }
+
         $model->id = (string) Str::uuid();
         if ((in_array('url', $model->getFillable())))
             $model->url = Str::kebab($model->name);

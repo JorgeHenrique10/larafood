@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TableRequest;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class TableController extends Controller
 {
@@ -129,5 +130,19 @@ class TableController extends Controller
             'tables' => $tables,
             'filters' => $filters
         ]);
+    }
+
+    public function showQrcode($identity)
+    {
+        if (!$identity) {
+            return redirect()->back();
+        }
+
+
+        $tenant = auth()->user()->tenant;
+
+        $url = env('URL_CLIENT_QRCODE') . "{$tenant->id}/{$identity}";
+
+        return view('admin.pages.tables.qrcode', ['url' => $url]);
     }
 }
