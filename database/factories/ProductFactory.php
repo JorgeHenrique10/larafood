@@ -21,7 +21,7 @@ class ProductFactory extends Factory
         return [
             'tenant_id' => Tenant::factory()->create(),
             'title' => Str::random(8),
-            'price' => 10.00,
+            'price' => 9.99,
             'description' => fake()->sentence()
         ];
     }
