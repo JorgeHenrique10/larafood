@@ -19,6 +19,7 @@ use App\Observers\RolePermissionObserver;
 use App\Observers\TableObserver;
 use App\Tenant\Observers\TenantObserver;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -49,5 +50,14 @@ class AppServiceProvider extends ServiceProvider
         Order::observe(OrderObserver::class);
         RolePermission::observe(RolePermissionObserver::class);
         Paginator::useBootstrap();
+
+        /**
+         * IF Stattements
+         */
+
+        Blade::if('admin', function () {
+            $user = auth()->user();
+            return $user->isAdmin();
+        });
     }
 }

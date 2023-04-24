@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ACL\RolePermissionController;
 use App\Http\Controllers\Admin\ACL\RoleUserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CategoryProductController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DetailPlanController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\ProductController;
@@ -173,7 +174,11 @@ Route::prefix('admin')
         Route::put('plans/{id}', [PlanController::class, 'update'])->name('plans.update');
         Route::get('plans/{id}', [PlanController::class, 'show'])->name('plans.show');
         Route::delete('plans/{id}', [PlanController::class, 'destroy'])->name('plans.destroy');
-        Route::get('/', [PlanController::class, 'index'])->name('admin.index');
+
+        /**
+         * Dasboard - Home
+         */
+        Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
     });
 
 require __DIR__ . '/auth.php';

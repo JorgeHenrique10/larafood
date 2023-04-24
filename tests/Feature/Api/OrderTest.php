@@ -38,7 +38,7 @@ class OrderTest extends TestCase
 
         foreach ($products as $product) {
             $payload['products'][] = [
-                'id' => $product->id,
+                'id' => (string) $product->id,
                 'qtd' => 10
             ];
         }

@@ -33,4 +33,23 @@ class Tenant extends Model
     {
         return $this->belongsTo(Plan::class, 'plan_id');
     }
+
+    public function tables()
+    {
+        return $this->hasMany(Table::class);
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
 }

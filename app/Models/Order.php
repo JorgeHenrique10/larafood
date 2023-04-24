@@ -38,6 +38,6 @@ class Order extends Model
 
     public function evaluations()
     {
-        return $this->hasMany(EvaluationOrder::class);
+        return $this->hasMany(EvaluationOrder::class, 'order_id', 'evaluation_order');
     }
 }
