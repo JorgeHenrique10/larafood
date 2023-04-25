@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Trait\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tenant extends Model
 {
@@ -51,5 +52,9 @@ class Tenant extends Model
     public function roles()
     {
         return $this->hasMany(Role::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

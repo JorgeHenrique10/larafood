@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\TenantController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Site\SiteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,13 @@ Route::prefix('admin')
 
             dd($teste);
         });
+
+        /**
+         * Routes Orders
+         */
+
+        Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+
 
         /**
          * Routes Role x User

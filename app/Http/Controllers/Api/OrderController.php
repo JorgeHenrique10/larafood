@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\OrderCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OrderRequest;
 use App\Http\Resources\Api\OrderResource;
+use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class OrderController extends Controller
 {
@@ -14,9 +18,17 @@ class OrderController extends Controller
     {
     }
 
+    public function index()
+    {
+        return view('admin.pages.orders.index');
+    }
+
     public function store(OrderRequest $request)
     {
         $order = $this->orderService->storeOrder($request->all());
+
+        broadcast(new OrderCreated($order));
+
         return new OrderResource($order);
     }
     public function show($identify)
